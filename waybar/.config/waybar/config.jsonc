@@ -1,0 +1,33 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 24,
+    "margin-top": 1,
+    "margin-left": 0,
+    "margin-right": 0,
+    "spacing": 1,
+    "exclusive": true,
+    "passthrough": false,
+
+    "include": ["/home/Giova/.config/waybar/modules.jsonc"],
+
+    "modules-left": ["group/left"],
+    "modules-center": ["group/center"],
+    "modules-right": ["group/right"],
+
+    "group/left": {
+        "orientation": "horizontal",
+        "modules": ["clock"]
+    },
+
+    "group/center": {
+        "orientation": "horizontal",
+        "modules": ["hyprland/workspaces"]
+    },
+
+    "group/right": {
+        "orientation": "horizontal",
+        "modules": ["cpu", "memory", "network", "bluetooth", "battery", "tray"],
+        "spacing": 4
+    }
+}

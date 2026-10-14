@@ -1,0 +1,239 @@
+/* ── Palette (Neutral / Mono) ───────────────────────────────── */
+/* ── Palette (Neutral / Mono) ───────────────────────────────── */
+@define-color base     #141414; /* bar background */
+@define-color surface  #1c1c1c;
+@define-color overlay  #3a3a3a; /* borders / separators */
+@define-color text     #e8e8e8; /* primary text */
+@define-color subtext  #8c8c8c; /* inactive / secondary text */
+@define-color muted    #5a5a5a; /* dimmed icons */
+@define-color accent   #ffffff; /* active / highlighted state */
+@define-color urgent   #b5674f; /* rosso/arancio desaturato per notifiche/urgenze */
+
+/* ── Reset ──────────────────────────────────────────────────── */
+* {
+    font-family: "IBM Plex Mono", "JetBrainsMono Nerd Font", "Noto Sans Mono", monospace;
+    font-size: 12px;
+    font-weight: 500;
+    min-height: 0;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+}
+
+/* ── Bar container (trasparente, a tutta larghezza, invisibile) ─ */
+window#waybar {
+    background: transparent;
+    color: @text;
+}
+
+/* ── Isole (i tre gruppi: workspaces / clock / sistema) ────────── */
+#left,
+#center,
+#right {
+    background: alpha(@base, 0.88);
+    border-radius: 12px;
+    border: 1px solid alpha(@overlay, 0.6);
+    padding: 0 10px;
+}
+
+#left {
+    margin: 0 0 0 0;
+}
+
+#center {
+    margin: 0;
+}
+
+#right {
+    margin: 0 0 0 0;
+}
+
+/* blur fallback quando non c'e' blur compositor */
+window#waybar.hidden {
+    opacity: 0;
+}
+
+/* ── Moduli generici ────────────────────────────────────────── */
+.modules-left,
+.modules-center,
+.modules-right {
+    padding: 0 6px;
+}
+
+#workspaces,
+#window,
+#clock,
+#pulseaudio,
+#backlight,
+#network,
+#bluetooth,
+#battery,
+#cpu,
+#memory,
+#tray {
+    padding: 0 10px;
+    color: @text;
+}
+
+/* ── Workspaces ─────────────────────────────────────────────── */
+#workspaces {
+    margin: 0;
+    padding: 0 0;
+}
+
+#workspaces button {
+    padding: 0;
+    color: alpha(@subtext, 0.4);
+    background: transparent;
+    border-radius: 50%;
+    margin: 0px 2px;
+    font-size: 14px;
+    min-width: 0;
+    min-height: 0;
+    transition: all 0.15s ease;
+}
+
+#workspaces button label{
+    font-size: 14px;
+    min-width: 0;
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+}
+
+#workspaces button.active label {
+    font-size: 16px;
+    color: @accent;
+    margin-top: -1px;
+}
+
+#workspaces button:hover {
+    background: transparent;
+    color: @subtext;
+}
+
+#workspaces button.active {
+    background: transparent;
+    color: @accent;
+}
+
+#workspaces button.urgent {
+    background: transparent;
+    color: @urgent;
+}
+
+#workspaces button.urgent label {
+    color: @urgent;
+}
+
+/* ── Finestra attiva ────────────────────────────────────────── */
+#window {
+    color: @subtext;
+    font-size: 12px;
+}
+
+/* ── Orologio ───────────────────────────────────────────────── */
+#clock {
+    color: @text;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* ── Audio ──────────────────────────────────────────────────── */
+#pulseaudio {
+    color: @text;
+}
+
+#pulseaudio.muted {
+    color: @muted;
+}
+
+/* ── Luminosita' ────────────────────────────────────────────── */
+#backlight {
+    color: @subtext;
+}
+
+/* ── Rete ───────────────────────────────────────────────────── */
+#network {
+    color: @text;
+}
+
+#network.disconnected {
+    color: @muted;
+}
+
+/* ── Bluetooth (visibile solo se connesso) ─────────────────── */
+#bluetooth {
+    color: @text;
+}
+
+/* ── Batteria ───────────────────────────────────────────────── */
+#battery {
+    color: @text;
+}
+
+#battery.warning {
+    color: @text;
+    font-weight: 700;
+}
+
+#battery.critical {
+    background-color: @text;
+    color: @base;
+    border-radius: 6px;
+    font-weight: 700;
+    animation: blink 1s steps(1) infinite;
+}
+
+#battery.charging {
+    color: @accent;
+}
+
+@keyframes blink {
+    50% { background-color: alpha(@text, 0.3); color: @text; }
+}
+
+/* ── Tray ───────────────────────────────────────────────────── */
+#tray {
+    padding: 0 6px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: alpha(@text, 0.2);
+    border-radius: 6px;
+}
+
+#cpu {
+    color: @text;
+}
+
+#cpu.warning {
+    color: @text;
+    font-weight: 700;
+}
+
+#cpu.critical {
+    background-color: @text;
+    color: @base;
+    border-radius: 6px;
+    font-weight: 700;
+}
+
+#memory {
+    color: @subtext;
+}
+
+/* ── Separatori visivi (opzionale) ──────────────────────────── */
+.modules-right > widget:not(:last-child) > #network,
+.modules-right > widget:not(:last-child) > #bluetooth,
+.modules-right > widget:not(:last-child) > #pulseaudio,
+.modules-right > widget:not(:last-child) > #backlight,
+.modules-right > widget:not(:last-child) > #battery {
+    border-right: 1px solid alpha(@overlay, 0.5);
+}
