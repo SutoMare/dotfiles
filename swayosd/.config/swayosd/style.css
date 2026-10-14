@@ -1,0 +1,73 @@
+/* ── Palette (Neutral / Mono) — stessa della waybar ────────────── */
+@define-color base     #141414; /* sfondo OSD */
+@define-color surface  #1c1c1c;
+@define-color overlay  #3a3a3a; /* bordo */
+@define-color text     #e8e8e8; /* icona/etichetta */
+@define-color subtext  #8c8c8c; /* trough (barra vuota) */
+@define-color muted    #5a5a5a; /* dimmed / disabled */
+@define-color accent   #ffffff; /* progress (barra piena) */
+
+/* ── Font coerente con la waybar ────────────────────────────────── */
+* {
+    font-family: "IBM Plex Mono", "JetBrainsMono Nerd Font", "Noto Sans Mono", monospace;
+    font-weight: 500;
+}
+
+/* ── Finestra dell'OSD ──────────────────────────────────────────── */
+window#osd {
+    padding: 12px 20px;
+    border-radius: 12px;               /* stesso raggio delle isole della waybar */
+    border: 1px solid alpha(@overlay, 0.6);
+    background: alpha(@base, 0.88);    /* stessa opacità delle isole */
+}
+
+#container {
+    margin: 16px;
+}
+
+/* ── Icona ed etichetta (es. percentuale volume/luminosità) ───────── */
+image,
+label {
+    color: @text;
+}
+
+progressbar:disabled,
+image:disabled {
+    opacity: 0.4;
+    color: @muted;
+}
+
+/* ── Barra di progresso (volume / luminosità) ──────────────────── */
+progressbar,
+segmentedprogress {
+    min-height: 6px;
+    border-radius: 999px;
+    background: transparent;
+    border: none;
+}
+
+/* Traccia vuota della barra */
+trough,
+segment {
+    min-height: inherit;
+    border-radius: inherit;
+    border: none;
+    background: alpha(@subtext, 0.35);
+}
+
+/* Parte piena della barra (progresso attuale) */
+progress,
+segment.active {
+    min-height: inherit;
+    border-radius: inherit;
+    border: none;
+    background: @accent;
+}
+
+segment {
+    margin-left: 8px;
+}
+
+segment:first-child {
+    margin-left: 0;
+}
