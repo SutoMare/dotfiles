@@ -1,0 +1,49 @@
+# 1. DEFINIAMO I PROGRAMMI (OPENERS)
+[opener]
+# Definiamo VSCodium per i file di programmazione
+vscodium = [
+	{ run = 'codium "$@"', orphan = true, desc = "Apri con VSCodium" }
+]
+
+# Definiamo zen per i PDF e PowerPoint
+zen = [
+   { run = 'zen-browser "$@"', orphan = true, desc = "Apri con zen browser" }
+]
+   # Definiamo kwrite per i file di tsto.txt
+kwrite = [
+	{ run = 'kwrite "$@"', orphan = true, desc = "Apri con kWrite" }
+]
+gimp = [
+	{ run = 'gimp "$@"', orphan = true, desc = "Apri con GIMP" }
+]
+
+# 2. ASSOCIAMO I FILE AI PROGRAMMI
+[open]
+prepend_rules = [
+	# Estensioni di programmazione -> VSCodium
+	{ url = "*.c", use = "vscodium" },
+	{ url = "*.cpp", use = "vscodium" },
+	{ url = "*.java", use = "vscodium" },
+	{ url = "*.h", use = "vscodium" },
+	{ url = "*.hpp", use = "vscodium" },
+	{ url = "*.py", use = "vscodium" },
+
+	# PDF e PowerPoint -> zen
+	{ url = "*.pdf", use = "zen" },
+	{ url = "*.ppt", use = "zen" },
+	{ url = "*.pptx", use = "zen" },
+	{ url = "*.html", use = "zen"},
+	{ url = "*.md", use = "zen"},
+	# file di testo
+	{ url = "*.txt", use = "kwrite" },
+
+	# Immagini -> GIMP
+	{ url = "*.png", use = "gimp" },
+	{ url = "*.jpg", use = "gimp" },
+	{ url = "*.jpeg", use = "gimp" },
+	{ url = "*.gif", use = "gimp" },
+	{ url = "*.bmp", use = "gimp" },
+	{ url = "*.tiff", use = "gimp" },
+	{ url = "*.webp", use = "gimp" }
+]
+	
