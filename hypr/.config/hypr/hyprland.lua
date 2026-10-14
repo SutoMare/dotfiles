@@ -42,7 +42,7 @@ end
 
 hl.on("hyprland.start", function()
     -- Status bar
-    hl.exec_cmd("waybar")
+    hl.exec_cmd("wayle panel start")
     -- Wallpaper daemon (configura ~/.config/hypr/hyprpaper.conf)
     hl.exec_cmd("hyprpaper")
     -- Notifiche desktop
